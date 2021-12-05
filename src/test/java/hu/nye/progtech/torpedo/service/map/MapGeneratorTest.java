@@ -1,17 +1,17 @@
 package hu.nye.progtech.torpedo.service.map;
 
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class MapGeneratorTest {
     private MapGenerator underTest;
 
-    private static int NUMBER_OF_ROWS = 2;
-    private static int NUMBER_OF_COLUMNS = 2;
-
     private static char EXPECTED_DOT = '~';
-    private static char EXPECTED_SHIP = '0';
 
     @BeforeEach
     public void setUp() {
@@ -19,16 +19,22 @@ public class MapGeneratorTest {
     }
 
     @Test
-    public void generateMapForTheGame() {
+    public void testGenerateMapForTheGameCheckValueDot() {
         //given in setup
 
         //when
         char[][] map = underTest.PlaceShips();
         //then
-        if (map[4][4] == '~') {
-            Assertions.assertEquals(EXPECTED_DOT, map[4][4]);
-        } else {
-            Assertions.assertEquals(EXPECTED_SHIP, map[4][4]);
-        }
+        assertEquals(EXPECTED_DOT, map[0][0]);
+    }
+
+    @Test
+    public void testGenerateShootAbleArray(){
+        //given
+        boolean expected = true;
+        //when
+        boolean[][] shootable = underTest.ShootablePlaces();
+        //then
+        assertEquals(expected, shootable[0][0]);
     }
 }

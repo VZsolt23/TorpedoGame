@@ -1,13 +1,12 @@
 package hu.nye.progtech.torpedo.service.map;
 
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CoordinateGeneratorTest {
     private CoordinateGenerator underTest;
-
-    private static final boolean EXPECTED_RESULT = true;
 
     @BeforeEach
     public void setUP() {
@@ -20,11 +19,7 @@ public class CoordinateGeneratorTest {
 
         //when
         int number = underTest.GenerateCoordinate();
-        boolean result = false;
-        if (number >= 0 && number < 10) {
-            result = true;
-        }
         //then
-        Assertions.assertEquals(EXPECTED_RESULT, result);
+        assertTrue(0 <= number && number <= 9);
     }
 }

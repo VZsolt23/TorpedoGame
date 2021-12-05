@@ -77,8 +77,17 @@ public class MapGenerator {
                 map[i][j] = mapTerv[i][j] == 0 || mapTerv[i][j] == 9 ? '~' : '0';
             }
         }
-        
+
         return map;
     }
 
+    public boolean[][] ShootablePlaces() {
+        boolean[][] isShootable = new boolean[10][10];
+        for (int i = 0; i < 10; i++){
+            for (int j = 0; j < 10; j++){
+                isShootable[i][j] = true;
+            }
+        }
+        return isShootable;
+    }
 }
