@@ -18,7 +18,7 @@ public class CoordinateGeneratorTest {
         //given in setup
 
         //when
-        int number = underTest.GenerateCoordinate();
+        int number = underTest.generateCoordinate();
         //then
         assertTrue(0 <= number && number <= 9);
     }

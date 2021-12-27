@@ -11,15 +11,18 @@ import hu.nye.progtech.torpedo.service.utility.MapToString;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Spring Java configuration class for persistence layer specific Spring Beans.
+ */
 @Configuration
 public class RepositoryConfiguration {
-    /*@Bean
+    @Bean
     Connection connection() throws SQLException {
-        return DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", "Zsolt", "password");
+        return DriverManager.getConnection("jdbc:h2:tcp://localhost/~/torpedo", "sa", "password");
     }
 
     @Bean(destroyMethod = "close")
     GameSavesRepository gameSavesRepository(Connection connection, MapToString mapToString, MapParser mapParser) {
         return new JdbcGameSavesRepository(connection, mapToString, mapParser);
-    }*/
+    }
 }

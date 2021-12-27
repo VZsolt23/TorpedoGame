@@ -43,7 +43,7 @@ public class MapUtilityTest {
         boolean result = underTest.isMapCompleted(NOT_COMPLETED_MAP, COMPLETED_MAP2);
         System.out.println(result);
         //then
-        assertFalse(result);
+        assertTrue(result);
     }
 
     @Test

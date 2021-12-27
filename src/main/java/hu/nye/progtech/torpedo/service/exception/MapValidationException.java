@@ -1,6 +1,9 @@
 package hu.nye.progtech.torpedo.service.exception;
 
-public class MapValidationException extends Exception{
+/**
+ * Exception that should be thrown when map validation fails.
+ */
+public class MapValidationException extends Exception {
     public MapValidationException(String message) {
         super(message);
     }

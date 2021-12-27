@@ -5,6 +5,9 @@ import hu.nye.progtech.torpedo.service.input.UserInputReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Component that performs a game step.
+ */
 public class GameStepPerformer {
     private static final Logger LOGGER = LoggerFactory.getLogger(GameStepPerformer.class);
 
@@ -16,7 +19,12 @@ public class GameStepPerformer {
         this.inputHandler = inputHandler;
     }
 
-
+    /**
+     * Performs a game step.
+     *
+     * A game step consists of taking the input from the user, then handling
+     * the input.
+     */
     public void performGameStep() {
         String input = userInputReader.readInput();
         LOGGER.info("Read user input = '{}'", input);

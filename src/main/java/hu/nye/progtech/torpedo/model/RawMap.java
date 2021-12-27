@@ -2,6 +2,11 @@ package hu.nye.progtech.torpedo.model;
 
 import java.util.Objects;
 
+/**
+ * Raw representation of a Sudoku map.
+ * The actual map state is stored in {@link String} values. This model class is mainly used for persist
+ * a given game state.
+ */
 public class RawMap {
     private String map;
     private String shootable;
@@ -29,8 +34,12 @@ public class RawMap {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         RawMap rawMap = (RawMap) o;
         return map.equals(rawMap.map) && shootable.equals(rawMap.shootable);
     }

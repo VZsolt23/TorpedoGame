@@ -10,10 +10,13 @@ import hu.nye.progtech.torpedo.service.exception.MapParsingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Parses a raw representation of a map into a {@link MapVO} object.
+ */
 public class MapParser {
     private static final Logger LOGGER = LoggerFactory.getLogger(MapParser.class);
 
-    private static final String VALID_ROW_REGEX = "[~0]+";
+    private static final String VALID_ROW_REGEX = "[~0X+]+";
 
     private final int numberOfRows;
     private final int numberOfColumns;
@@ -23,6 +26,13 @@ public class MapParser {
         this.numberOfColumns = numberOfColumns;
     }
 
+    /**
+     * Parses a map from a raw representation.
+     *
+     * @param rawMap the raw representation of a map
+     * @return a parsed map as a {@link MapVO} object
+     * @throws MapParsingException if the raw representation of the map was invalid
+     */
     public MapVO parseMap(RawMap rawMap) throws MapParsingException {
         LOGGER.info("Parsing the raw map = {}", rawMap);
 

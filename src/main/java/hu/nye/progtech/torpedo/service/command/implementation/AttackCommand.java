@@ -8,12 +8,14 @@ import hu.nye.progtech.torpedo.service.command.Command;
 import hu.nye.progtech.torpedo.service.command.performer.AttackPerformer;
 import hu.nye.progtech.torpedo.service.exception.AttackException;
 import hu.nye.progtech.torpedo.service.ingame.ai.AIAttack;
-import hu.nye.progtech.torpedo.ui.HideShips;
 import hu.nye.progtech.torpedo.ui.MapUI;
 import hu.nye.progtech.torpedo.ui.PrintWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Command used to attack a position.
+ */
 public class AttackCommand implements Command {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AttackCommand.class);
@@ -43,7 +45,6 @@ public class AttackCommand implements Command {
         int columnIndex = Integer.parseInt(parts[2]);
         MapUI mapUI = new MapUI();
         AIAttack aiAttack = new AIAttack();
-        HideShips hideShips = new HideShips();
 
         LOGGER.info("Attack command with rowIndex = {}, columnIndex = {}", rowIndex, columnIndex);
         try {
@@ -51,15 +52,14 @@ public class AttackCommand implements Command {
             gameState.setCurrentAIMap(newAIMap);
 
             System.out.println("AI map:");
-            mapUI.Field(newAIMap);
-            //hideShips.shipHider(gameState.getCurrentAIMap().getMap());
+            mapUI.field(newAIMap);
 
             Thread.sleep(1000);
             MapVO newPlayerMap = aiAttack.perform(gameState.getCurrentPlayerMap());
             gameState.setCurrentPlayerMap(newPlayerMap);
 
             System.out.println("Your map:");
-            mapUI.Field(newPlayerMap);
+            mapUI.field(newPlayerMap);
         } catch (ArithmeticException | AttackException | InterruptedException e) {
             LOGGER.error("Exception occurred while performing shoot operation", e);
             printWrapper.printLine(ATTACK_ERROR_MESSAGE);

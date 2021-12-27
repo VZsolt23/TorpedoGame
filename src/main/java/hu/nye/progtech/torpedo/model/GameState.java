@@ -2,6 +2,9 @@ package hu.nye.progtech.torpedo.model;
 
 import java.util.Objects;
 
+/**
+ * Model class used to store actual game state.
+ */
 public class GameState {
     public static GameStateBuilder builder() {
         return new GameStateBuilder();
@@ -67,6 +70,9 @@ public class GameState {
                 '}';
     }
 
+    /**
+     * Builder for {@link GameState}.
+     */
     public static final class GameStateBuilder {
         private MapVO playerMap;
         private MapVO aiMap;
@@ -79,6 +85,13 @@ public class GameState {
             return new GameStateBuilder();
         }
 
+        /**
+         * Building game state.
+         *
+         * @param currentPlayerMap player map.
+         * @param currentAIMap AI map.
+         * @return map representations.
+         */
         public GameStateBuilder withCurrentMap(MapVO currentPlayerMap, MapVO currentAIMap) {
             this.playerMap = currentPlayerMap;
             this.aiMap = currentAIMap;

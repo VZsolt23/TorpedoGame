@@ -1,7 +1,13 @@
 package hu.nye.progtech.torpedo.ui;
 
+/**
+ * Class used to print usable command list.
+ */
 public class MenuUI {
-    public void MenuOptions() {
+    /**
+     * Command list.
+     */
+    public void menuOptions() {
         System.out.println("-----Torpedo game-----\n" +
                 "print - Display maps\n" +
                 "fire - Attack at position (fire 2 3)\n" +

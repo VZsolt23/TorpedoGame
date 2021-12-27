@@ -3,6 +3,9 @@ package hu.nye.progtech.torpedo.model;
 import java.util.Arrays;
 import java.util.Objects;
 
+/**
+ * Model class used to represent a Battleship map.
+ */
 public class MapVO {
     private final int numberOfRows;
     private final int numberOfColumns;
@@ -60,10 +63,15 @@ public class MapVO {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         MapVO mapVO = (MapVO) o;
-        return numberOfRows == mapVO.numberOfRows && numberOfColumns == mapVO.numberOfColumns && Arrays.deepEquals(map, mapVO.map) && Arrays.deepEquals(isShootable, mapVO.isShootable);
+        return numberOfRows == mapVO.numberOfRows && numberOfColumns == mapVO.numberOfColumns &&
+                Arrays.deepEquals(map, mapVO.map) && Arrays.deepEquals(isShootable, mapVO.isShootable);
     }
 
     @Override

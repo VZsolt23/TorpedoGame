@@ -6,6 +6,9 @@ import hu.nye.progtech.torpedo.service.command.Command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Command used to save actual game state.
+ */
 public class SaveCommand implements Command {
     private static final Logger LOGGER = LoggerFactory.getLogger(SaveCommand.class);
     private static final String SAVE_COMMAND = "save";

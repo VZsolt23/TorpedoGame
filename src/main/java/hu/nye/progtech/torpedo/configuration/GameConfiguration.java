@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 
 import hu.nye.progtech.torpedo.model.GameState;
 import hu.nye.progtech.torpedo.model.MapVO;
+import hu.nye.progtech.torpedo.persistance.implementation.MapParser;
 import hu.nye.progtech.torpedo.service.command.InputHandler;
 import hu.nye.progtech.torpedo.service.command.performer.AttackPerformer;
 import hu.nye.progtech.torpedo.service.ingame.Controller;
@@ -16,6 +17,9 @@ import hu.nye.progtech.torpedo.ui.PrintWrapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Game configuration class for the Battleship game.
+ */
 @Configuration
 public class GameConfiguration {
     @Bean(initMethod = "start")
@@ -27,10 +31,10 @@ public class GameConfiguration {
     GameState gameState() {
         MapGenerator mapGenerator = new MapGenerator();
 
-        char[][] map = mapGenerator.PlaceShips();
-        char[][] map2 = mapGenerator.PlaceShips();
-        boolean[][] isShootable = mapGenerator.ShootablePlaces();
-        boolean[][] isShootable2 = mapGenerator.ShootablePlaces();
+        char[][] map = mapGenerator.placeShips();
+        char[][] map2 = mapGenerator.placeShips();
+        boolean[][] isShootable = mapGenerator.shootablePlaces();
+        boolean[][] isShootable2 = mapGenerator.shootablePlaces();
         MapVO playerMap = new MapVO(10, 10, map, isShootable);
         MapVO aiMap = new MapVO(10, 10, map2, isShootable2);
         return new GameState(playerMap, aiMap, false);
@@ -55,5 +59,10 @@ public class GameConfiguration {
     @Bean
     PrintWrapper printWrapper() {
         return new PrintWrapper();
+    }
+
+    @Bean
+    MapParser mapParser() {
+        return new MapParser(10, 10);
     }
 }

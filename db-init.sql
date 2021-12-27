@@ -1,4 +1,4 @@
-CREATE TABLE game_saves (
+CREATE TABLE GAME_SAVES (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     playermap varchar(255) NOT NULL,
     playershootable varchar(255) NOT NULL,

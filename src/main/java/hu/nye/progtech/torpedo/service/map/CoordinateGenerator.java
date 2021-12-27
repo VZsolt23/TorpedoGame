@@ -2,8 +2,16 @@ package hu.nye.progtech.torpedo.service.map;
 
 import java.util.Random;
 
+/**
+ * Class used to generate numbers which used to coordinate.
+ */
 public class CoordinateGenerator {
-    public int GenerateCoordinate() {
+    /**
+     * Number generation.
+     *
+     * @return with a number.
+     */
+    public int generateCoordinate() {
         int coordinate;
         Random r = new Random();
         coordinate = r.nextInt(10);

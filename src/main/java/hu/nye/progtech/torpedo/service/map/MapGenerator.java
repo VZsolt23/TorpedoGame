@@ -2,20 +2,30 @@ package hu.nye.progtech.torpedo.service.map;
 
 import java.util.Random;
 
+/**
+ * Class used to generate Battleship maps.
+ */
 public class MapGenerator {
 
     CoordinateGenerator coordinate = new CoordinateGenerator();
 
-    public char[][] PlaceShips() {
+    /**
+     * Accommodation of ships.
+     *
+     * @return with map.
+     */
+    public char[][] placeShips() {
         int[][] mapTerv = new int[10][10];
         char[][] map = new char[10][10];
         Random vertical = new Random();
-        int x, y;
-        boolean isVertical, isFree;
+        int x;
+        int y;
+        boolean isVertical;
+        boolean isFree;
 
         for (int i = 5; i > 0; i--) {
-            x = coordinate.GenerateCoordinate();
-            y = coordinate.GenerateCoordinate();
+            x = coordinate.generateCoordinate();
+            y = coordinate.generateCoordinate();
             isVertical = vertical.nextBoolean();
 
             if (isVertical) {
@@ -81,10 +91,15 @@ public class MapGenerator {
         return map;
     }
 
-    public boolean[][] ShootablePlaces() {
+    /**
+     * Positions with true or false.
+     *
+     * @return map representation.
+     */
+    public boolean[][] shootablePlaces() {
         boolean[][] isShootable = new boolean[10][10];
-        for (int i = 0; i < 10; i++){
-            for (int j = 0; j < 10; j++){
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
                 isShootable[i][j] = true;
             }
         }

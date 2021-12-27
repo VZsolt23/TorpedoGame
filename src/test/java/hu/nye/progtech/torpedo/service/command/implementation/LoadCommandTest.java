@@ -47,21 +47,22 @@ public class LoadCommandTest {
         Mockito.verifyNoMoreInteractions(gameSavesRepository, gameState);
     }
 
-    /*@Test
+    @Test
     public void testProcessShouldGetSavedGameState(){
         //given
         MapVO playerMap = Mockito.mock(MapVO.class);
         MapVO aiMap = Mockito.mock(MapVO.class);
-        Mockito.when(gameSavesRepository.load()).thenReturn(playerMap,aiMap);
+        Mockito.when(gameSavesRepository.loadPlayerMap()).thenReturn(playerMap);
+        Mockito.when(gameSavesRepository.loadAIMap()).thenReturn(aiMap);
         //when
         underTest.process("input");
         //then
-        Mockito.verify(gameSavesRepository).load();
-        Mockito.verify(gameSavesRepository).load();
+        Mockito.verify(gameSavesRepository).loadPlayerMap();
+        Mockito.verify(gameSavesRepository).loadAIMap();
         Mockito.verify(gameState).setCurrentPlayerMap(playerMap);
         Mockito.verify(gameState).setCurrentAIMap(aiMap);
         Mockito.verifyNoMoreInteractions(gameSavesRepository, gameState, playerMap, aiMap);
-    }*/
+    }
 
 
 }

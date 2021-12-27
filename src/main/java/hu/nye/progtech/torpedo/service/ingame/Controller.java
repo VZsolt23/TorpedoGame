@@ -7,6 +7,9 @@ import hu.nye.progtech.torpedo.ui.MenuUI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Component that controls the flow of a game.
+ */
 public class Controller {
     private static final Logger LOGGER = LoggerFactory.getLogger(Controller.class);
 
@@ -20,10 +23,13 @@ public class Controller {
         this.mapUtil = mapUtil;
     }
 
+    /**
+     * Starts the game loop.
+     */
     public void start() {
         LOGGER.info("Starting game loop");
         MenuUI menuUI = new MenuUI();
-        menuUI.MenuOptions();
+        menuUI.menuOptions();
         while (isGameInProgress()) {
             gameStepPerformer.performGameStep();
         }

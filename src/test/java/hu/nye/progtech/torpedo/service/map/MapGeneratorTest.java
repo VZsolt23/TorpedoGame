@@ -2,16 +2,15 @@ package hu.nye.progtech.torpedo.service.map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.util.Assert;
 
 public class MapGeneratorTest {
     private MapGenerator underTest;
 
     private static char EXPECTED_DOT = '~';
+    private static char EXPECTED_SHIP = '0';
 
     @BeforeEach
     public void setUp() {
@@ -23,9 +22,9 @@ public class MapGeneratorTest {
         //given in setup
 
         //when
-        char[][] map = underTest.PlaceShips();
+        char[][] map = underTest.placeShips();
         //then
-        assertEquals(EXPECTED_DOT, map[0][0]);
+        Assert.isTrue(EXPECTED_DOT == map[0][0] || EXPECTED_SHIP == map[0][0]);
     }
 
     @Test
@@ -33,7 +32,7 @@ public class MapGeneratorTest {
         //given
         boolean expected = true;
         //when
-        boolean[][] shootable = underTest.ShootablePlaces();
+        boolean[][] shootable = underTest.shootablePlaces();
         //then
         assertEquals(expected, shootable[0][0]);
     }

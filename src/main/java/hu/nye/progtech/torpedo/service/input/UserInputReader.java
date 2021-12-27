@@ -6,6 +6,9 @@ import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Component that reads the input from the user. Uses a {@link BufferedReader} as an input source.
+ */
 public class UserInputReader {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserInputReader.class);
 
@@ -15,6 +18,11 @@ public class UserInputReader {
         this.reader = reader;
     }
 
+    /**
+     * Reads the user input and returns it as a string.
+     *
+     * @return the user input as a string
+     */
     public String readInput() {
         String input = null;
 

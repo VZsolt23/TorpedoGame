@@ -5,6 +5,9 @@ import hu.nye.progtech.torpedo.ui.PrintWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Class for the unknown commands.
+ */
 public class UnknownCommand implements Command {
     private static final Logger LOGGER = LoggerFactory.getLogger(UnknownCommand.class);
 

@@ -1,11 +1,19 @@
 package hu.nye.progtech.torpedo.service.utility;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import hu.nye.progtech.torpedo.model.MapVO;
 
+/**
+ * Util class that helps to extract given parts of a {@link MapVO} object.
+ */
 public class MapUtility {
+    /**
+     * Determines if one of the given map is completed or not.
+     * A map is considered as completed, if there are no more zeros left in it.
+     *
+     * @param playerMap the map to check
+     * @param aiMap     the map to check
+     * @return {@code true} if the map is completed, {@code false} otherwise
+     */
     public boolean isMapCompleted(MapVO playerMap, MapVO aiMap) {
         boolean result = true;
         boolean result2 = true;
@@ -30,9 +38,14 @@ public class MapUtility {
             }
         }
 
-        if (!result || !result2) {
+        if (!result && !result2) {
             return false;
-        }else{
+        } else {
+            if (result) {
+                System.out.println("Sajnos vesztettél!");
+            } else {
+                System.out.println("Gratulálok! Te nyertél!");
+            }
             return true;
         }
     }

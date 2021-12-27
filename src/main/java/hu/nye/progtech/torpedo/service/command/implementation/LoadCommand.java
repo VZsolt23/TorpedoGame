@@ -6,6 +6,9 @@ import hu.nye.progtech.torpedo.service.command.Command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Command used to load game state from JDBC.
+ */
 public class LoadCommand implements Command {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoadCommand.class);
     private static final String LOAD_COMMAND = "load";
@@ -26,8 +29,8 @@ public class LoadCommand implements Command {
     @Override
     public void process(String input) {
         LOGGER.debug("Load command was called");
-        gameState.setCurrentPlayerMap(gameSavesRepository.load());
-        gameState.setCurrentAIMap(gameSavesRepository.load());
+        gameState.setCurrentPlayerMap(gameSavesRepository.loadPlayerMap());
+        gameState.setCurrentAIMap(gameSavesRepository.loadAIMap());
         LOGGER.info("Load was successful");
     }
 }

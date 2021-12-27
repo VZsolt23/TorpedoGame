@@ -1,6 +1,10 @@
 package hu.nye.progtech.torpedo.persistance.implementation;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import hu.nye.progtech.torpedo.model.MapVO;
 import hu.nye.progtech.torpedo.model.RawMap;
@@ -10,6 +14,9 @@ import hu.nye.progtech.torpedo.service.utility.MapToString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * JDBC based implementation of {@link GameSavesRepository}.
+ */
 public class JdbcGameSavesRepository implements GameSavesRepository, AutoCloseable {
     private static final Logger LOGGER = LoggerFactory.getLogger(JdbcGameSavesRepository.class);
 
@@ -39,25 +46,35 @@ public class JdbcGameSavesRepository implements GameSavesRepository, AutoCloseab
     }
 
     @Override
-    public MapVO load() {
-        RawMap rawMap = readRawMap();
+    public MapVO loadPlayerMap() {
+        RawMap rawMap = readRawMap("playermap", "playershootable");
         try {
             MapVO mapVO = mapParser.parseMap(rawMap);
             return mapVO;
         } catch (MapParsingException e) {
-            throw new RuntimeException("Failed to parse loaded map");
+            throw new RuntimeException("Failed to parse loaded Player map");
         }
     }
 
-    private RawMap readRawMap() {
+    @Override
+    public MapVO loadAIMap() {
+        RawMap rawMap = readRawMap("aimap", "aishootable");
+        try {
+            MapVO mapVO = mapParser.parseMap(rawMap);
+            return mapVO;
+        } catch (MapParsingException e) {
+            throw new RuntimeException("Failed to parse loaded AI map");
+        }
+    }
+
+    private RawMap readRawMap(String columnName1, String columnName2) {
         try (Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(SELECT_STATEMENT);) {
+             ResultSet resultSet = statement.executeQuery(SELECT_STATEMENT)) {
 
             resultSet.next();
-            String map = resultSet.getString("map");
-            String fixed = resultSet.getString("fixed");
-
-            RawMap rawMap = new RawMap(map, fixed);
+            String map = resultSet.getString(columnName1);
+            String shootable = resultSet.getString(columnName2);
+            RawMap rawMap = new RawMap(map, shootable);
             return rawMap;
         } catch (SQLException throwables) {
             throw new RuntimeException("Failed to load map from DB");
@@ -69,13 +86,25 @@ public class JdbcGameSavesRepository implements GameSavesRepository, AutoCloseab
         connection.close();
     }
 
-    private void deleteCurrentlyStoredSave() throws SQLException {
+    /**
+     * Delete old game state from JDBC.
+     *
+     * @throws SQLException when delete process is failed.
+     */
+    public void deleteCurrentlyStoredSave() throws SQLException {
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(DELETE_STATEMENT);
         }
     }
 
-    private void insertNewSave(MapVO currentPlayerMap, MapVO currentAIMap) throws SQLException {
+    /**
+     * Insert actual game state to JDBC.
+     *
+     * @param currentPlayerMap map to save.
+     * @param currentAIMap     map to save.
+     * @throws SQLException when failed to save game state.
+     */
+    public void insertNewSave(MapVO currentPlayerMap, MapVO currentAIMap) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_STATEMENT)) {
             preparedStatement.setString(1, mapToString.convertMapVoMapToString(currentPlayerMap));
             preparedStatement.setString(2, mapToString.convertMapVoShootableToString(currentPlayerMap));

@@ -2,6 +2,9 @@ package hu.nye.progtech.torpedo.service.command;
 
 import java.util.List;
 
+/**
+ * Class used to handle input.
+ */
 public class InputHandler {
     private final List<Command> commandList;
 
@@ -9,6 +12,13 @@ public class InputHandler {
         this.commandList = commandList;
     }
 
+    /**
+     * Handles an input through a list of {@link Command}s.
+     * <p>
+     * Only the first applicable command will be run.
+     *
+     * @param input the input as a string to be handled
+     */
     public void handleInput(String input) {
         for (Command command : commandList) {
             if (command.canProcess(input)) {
