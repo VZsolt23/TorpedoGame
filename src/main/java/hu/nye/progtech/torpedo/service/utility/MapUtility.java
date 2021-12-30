@@ -42,9 +42,9 @@ public class MapUtility {
             return false;
         } else {
             if (result) {
-                System.out.println("Sajnos vesztettél!");
+                System.out.println("You lost!");
             } else {
-                System.out.println("Gratulálok! Te nyertél!");
+                System.out.println("You won!");
             }
             return true;
         }
