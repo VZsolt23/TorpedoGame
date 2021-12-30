@@ -4,7 +4,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
- * Entry point of the Sudoku game.
+ * Entry point of the Battleship game.
  */
 public class Main {
     /**
